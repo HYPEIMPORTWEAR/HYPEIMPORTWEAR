@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="referrer" content="no-referrer">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title> Hype Import Wear | Elevate Your Drip | Men's Street Fashion </title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Oswald:wght@500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Entry Splash Screen -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-content">
+            <div class="splash-logo">
+                <span class="splash-brand">HYPE</span>
+                <span class="splash-brand accent">IMPORT</span>
+                <span class="splash-brand">WEAR</span>
+            </div>
+            <p class="splash-tagline">Premium Streetwear Collection</p>
+            <button id="enter-site-btn" class="enter-btn">
+                <span class="enter-text">ENTER & WIN DISCOUNT</span>
+                <span class="enter-icon">→</span>
+            </button>
+            <p class="splash-hint">🎁 Scratch card awaits you inside!</p>
+        </div>
+        <div class="splash-overlay"></div>
+    </div>
+
+    <!-- Background Effect -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo-container">
+                <img src="assets/590383713_17843854689654572_6541334605260396577_n.jpg" alt="Hype Import Wear"
+                    class="logo-img">
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" id="search-input" class="search-input" placeholder="SEARCH PRODUCTS...">
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <div class="header-actions">
+                <!-- Wishlist Button -->
+                <button id="wishlist-btn" class="wishlist-btn">
+                    <span class="wishlist-icon">♡</span>
+                    <span id="wishlist-count" class="badge">0</span>
+                </button>
+                <!-- Cart Button -->
+                <button id="cart-btn" class="cart-btn">
+                    Cart <span id="cart-count" class="badge">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="hero-content">
+            <h1 class="hero-title">ELEVATE YOUR <span class="highlight">DRIP</span></h1>
+            <p class="hero-subtitle">Premium Streetwear • Limited Drops • Authentic Hype</p>
+            <div class="hero-cta">
+                <button class="btn-primary hero-btn" onclick="scrollToCategory('Jackets & Bombers')">SHOP
+                    JACKETS</button>
+                <button class="btn-secondary hero-btn" onclick="scrollToCategory('Sneakers & Shoes')">SHOP
+                    SNEAKERS</button>
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
+    </section>
+
+    <!-- Category Quick Navigation -->
+    <nav class="category-nav" id="category-nav">
+        <div class="container">
+            <div class="category-pills" id="category-pills">
+                <!-- Category pills injected by JS -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div id="catalog">
+            <!-- Categories and Products will be injected here by JS -->
+        </div>
+    </main>
+
+    <!-- Discount FAB -->
+    <button id="spin-fab" class="spin-fab hidden">
+        <span class="fab-icon">%</span>
+        <span class="fab-text">DEAL</span>
+    </button>
+
+    <!-- Product Details Modal -->
+    <div id="product-modal" class="modal hidden">
+        <div class="modal-content product-details-content">
+            <button class="close-btn" data-target="product-modal">&times;</button>
+            <div class="product-details-grid">
+                <div class="product-image-container">
+                    <div class="slider-wrapper">
+                        <div id="modal-slider" class="image-slider">
+                            <!-- Images injected here -->
+                            <img id="modal-img" src="" alt="Product Image" class="modal-product-img">
+                        </div>
+                        <button id="slider-prev" class="slider-btn prev">&lt;</button>
+                        <button id="slider-next" class="slider-btn next">&gt;</button>
+                    </div>
+                    <div id="slider-dots" class="slider-dots"></div>
+                    <div id="modal-thumbnails" class="product-thumbnails"></div>
+                </div>
+                <div class="product-info-col">
+                    <h2 id="modal-title">Product Title</h2>
+                    <p id="modal-price" class="modal-price">₹0</p>
+
+                    <div class="modal-description">
+                        <h4>Description</h4>
+                        <p id="modal-desc">Product description goes here.</p>
+                        <ul id="modal-features"></ul>
+                    </div>
+
+                    <div class="product-options">
+                        <div class="option-group">
+                            <label>Size:</label>
+                            <div class="size-selector">
+                                <input type="radio" name="size" id="s-m" value="M" checked><label for="s-m">M</label>
+                                <input type="radio" name="size" id="s-l" value="L"><label for="s-l">L</label>
+                                <input type="radio" name="size" id="s-xl" value="XL"><label for="s-xl">XL</label>
+                                <input type="radio" name="size" id="s-xxl" value="XXL"><label for="s-xxl">XXL</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="modal-add-btn" class="btn-add-large">ADD TO CART</button>
+                    <a id="modal-ig-link" href="#" target="_blank" class="ig-link mt-20"
+                        style="display:block; text-align:center;">View on Instagram 📸</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="modal hidden">
+        <div class="modal-content cart-content">
+            <div class="modal-header">
+                <h2>Your Cart</h2>
+                <button class="close-btn" data-target="cart-modal">&times;</button>
+            </div>
+            <div id="cart-items" class="cart-items">
+                <!-- Cart items injected here -->
+                <p class="empty-msg">Your cart is empty.</p>
+            </div>
+            <div class="cart-footer">
+                <div class="summary">
+                    <p>Subtotal: <span id="cart-subtotal">$0.00</span></p>
+                    <p class="discount-row hidden">Discount (<span id="discount-rate">0</span>%): -<span
+                            id="discount-amount">$0.00</span></p>
+                    <h3>Total: <span id="cart-total">$0.00</span></h3>
+                </div>
+                <button id="checkout-btn" class="btn-primary full-width">Checkout via WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal hidden">
+        <div class="modal-content checkout-content">
+            <div class="modal-header">
+                <h2>Complete Your Order</h2>
+                <button class="close-btn" data-target="checkout-modal">&times;</button>
+            </div>
+            <div class="checkout-form">
+                <p class="checkout-subtitle">Enter your details to proceed</p>
+                <div class="form-group">
+                    <label for="customer-name">Your Name *</label>
+                    <input type="text" id="customer-name" class="form-input" placeholder="Enter your full name"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="customer-phone">Phone Number *</label>
+                    <input type="tel" id="customer-phone" class="form-input"
+                        placeholder="Enter your valid mobile number" required pattern="[0-9]{10}">
+                </div>
+                <div class="form-group">
+                    <label for="customer-address">Delivery Address *</label>
+                    <textarea id="customer-address" class="form-input address-input"
+                        placeholder="House No, Street, City, Pin Code" required rows="3"></textarea>
+                </div>
+                <div class="checkout-summary">
+                    <p>Items: <span id="checkout-items-count">0</span></p>
+                    <p>Total: <span id="checkout-total" class="highlight">₹0</span></p>
+                </div>
+                <button id="confirm-checkout-btn" class="btn-primary full-width">Send Order via WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Selection Modal (New Feature) -->
+    <div id="category-modal" class="modal hidden">
+        <div class="modal-content category-modal-content">
+            <!-- Header removed for cleaner look, handled in content -->
+            <div class="category-selection-body">
+                <h2 class="cat-modal-title">What's Your Vibe?</h2>
+                <p class="cat-modal-subtitle">Pick your interests so we can curate the drip for you.</p>
+
+                <div id="interest-selection" class="interest-grid">
+                    <!-- Injected via JS -->
+                </div>
+
+                <button id="confirm-interests-btn" class="btn-primary full-width mt-20">CONTINUE TO STORE</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scratch Card Modal -->
+    <div id="spin-modal" class="modal hidden">
+        <div class="modal-content scratch-content">
+            <div class="modal-header">
+                <h2>SCRATCH & WIN</h2>
+                <button class="close-btn" data-target="spin-modal">&times;</button>
+            </div>
+            <p class="scratch-subtitle">SCRATCH THE CARD TO REVEAL YOUR DISCOUNT</p>
+            <div class="scratch-card-container">
+                <div class="scratch-card">
+                    <div class="scratch-prize">
+                        <span class="prize-amount">10%</span>
+                        <span class="prize-text">OFF</span>
+                    </div>
+                    <canvas id="scratch-canvas"></canvas>
+                </div>
+            </div>
+            <p id="spin-result" class="scratch-result"></p>
+        </div>
+    </div>
+
+    <!-- Wishlist Modal -->
+    <div id="wishlist-modal" class="modal hidden">
+        <div class="modal-content wishlist-content">
+            <div class="modal-header">
+                <h2>Your Wishlist</h2>
+                <button class="close-btn" data-target="wishlist-modal">&times;</button>
+            </div>
+            <div id="wishlist-items" class="wishlist-items">
+                <p class="empty-msg">Your wishlist is empty. ♡</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top hidden">
+        <span class="btt-icon">↑</span>
+        <span class="btt-text">TOP</span>
+    </button>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <h3 class="footer-logo">HYPE IMPORT WEAR</h3>
+                <p class="footer-tagline">Elevate Your Drip. Stay Authentic.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="#" onclick="scrollToCategory('Jackets & Bombers'); return false;">Jackets</a>
+                <a href="#" onclick="scrollToCategory('Hoodies'); return false;">Hoodies</a>
+                <a href="#" onclick="scrollToCategory('Track Suits'); return false;">Track Suits</a>
+                <a href="#" onclick="scrollToCategory('Sneakers & Shoes'); return false;">Sneakers</a>
+            </div>
+            <div class="footer-social">
+                <h4>Connect</h4>
+                <a href="https://www.instagram.com/hypeimportwear/" target="_blank" class="social-link">
+                    📸 Instagram
+                </a>
+                <a href="https://wa.me/918309223139" target="_blank" class="social-link">
+                    💬 WhatsApp
+                </a>
+            </div>
+            <div class="footer-contact">
+                <h4>Order Now</h4>
+                <p>DM us on Instagram or WhatsApp</p>
+                <p class="highlight">COD + Free Shipping Available</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Hype Import Wear. All Rights Reserved.</p>
+            <p class="made-with">Made with 🔥 for the culture</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

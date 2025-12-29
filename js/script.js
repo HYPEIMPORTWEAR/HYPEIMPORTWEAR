@@ -850,7 +850,9 @@ function openCategorySelectionModal() {
         pill.className = 'interest-pill';
         pill.innerText = cat;
         pill.onclick = () => {
-            pill.classList.toggle('selected');
+            // Only one option can be selected
+            document.querySelectorAll('.interest-pill').forEach(p => p.classList.remove('selected'));
+            pill.classList.add('selected');
         };
         container.appendChild(pill);
     });
